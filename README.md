@@ -14,6 +14,7 @@ Bag of Popcorn (BOP) is an iOS application that shows the upcomig movies from [T
 
 ## Technical Requirements
    You should see this project as an opportunity to create an app following modern development best practices (given your platform of choice), but also feel free to use your own app architecture preferences (coding standards, code organization, third-party libraries, etc).
+   
    A TMDb API key is already available so you don't need to request your own:
       1f54bd990f1cdfb230adb312546d765d.
 The API documentation and examples of use can be found here:
