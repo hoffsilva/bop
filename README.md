@@ -48,7 +48,7 @@ should follow:
 
 ### Hero
 
-* [Hero](https://github.com/SwiftyJSON/SwiftyJSON), I used Hero to improve the user experience throught the view animations.
+* [Hero](https://github.com/lkzhao/Hero), I used Hero to improve the user experience throught the view animations.
 
 ### SwiftNotice
 
