@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import Hero
 
-class MoviesListTableViewController: UITableViewController {
+class MoviesListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var coll: UICollectionView!
+    @IBOutlet weak var moviesListTableView: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var moviesSearchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        moviesListTableView.delegate = self
+        moviesListTableView.dataSource = self
+        moviesSearchBar.delegate = self
         setTableViewBackground()
     }
 
@@ -25,71 +30,41 @@ class MoviesListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(360)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.height - 60
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell", for: indexPath) as! MoviesListTableViewCell
-        
-
+        cell.genresListCollectionView.delegate = self
+        cell.genresListCollectionView.dataSource = self
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "movieDetail")
+        Hero.shared.defaultAnimation = .zoom
+        Hero.shared.animate()
+        hero_replaceViewController(with: vc)
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    @IBAction func changeLanguage() {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "changeLanguage")
+        Hero.shared.defaultAnimation = .zoomSlide(direction: HeroDefaultAnimationType.Direction.left)
+        Hero.shared.animate()
+        hero_replaceViewController(with: vc)
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
 
@@ -106,21 +81,29 @@ extension MoviesListTableViewController: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genreCollectionViewCell", for: indexPath) as! GenresListCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genreCollectionViewCell", for: indexPath)
         
         // Configure the cell
-        cell.genreImageView.image = #imageLiteral(resourceName: "bg_table_view")
         
         return cell
     }
 }
 
+extension MoviesListTableViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+}
+
+
 extension MoviesListTableViewController {
+    
     func setTableViewBackground() {
-        let view = UIImageView(frame: tableView.frame)
+        let view = UIImageView(frame: moviesListTableView.frame)
         view.image = #imageLiteral(resourceName: "bg_table_view")
         view.contentMode = .scaleAspectFill
         view.alpha = 0.3
-        tableView.backgroundView = view
+        moviesListTableView.backgroundView = view
     }
 }
