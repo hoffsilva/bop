@@ -9,11 +9,13 @@
 import UIKit
 import Hero
 
-class MoviesListTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MoviesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var moviesListTableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var moviesSearchBar: UISearchBar!
+    
+    let viewModel = MoviesListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,8 @@ class MoviesListTableViewController: UIViewController, UITableViewDelegate, UITa
         moviesListTableView.dataSource = self
         moviesSearchBar.delegate = self
         setTableViewBackground()
+        
+        viewModel.loadMovies()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +72,7 @@ class MoviesListTableViewController: UIViewController, UITableViewDelegate, UITa
 
 }
 
-extension MoviesListTableViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MoviesListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -89,7 +93,7 @@ extension MoviesListTableViewController: UICollectionViewDataSource, UICollectio
     }
 }
 
-extension MoviesListTableViewController: UISearchBarDelegate {
+extension MoviesListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
@@ -97,7 +101,7 @@ extension MoviesListTableViewController: UISearchBarDelegate {
 }
 
 
-extension MoviesListTableViewController {
+extension MoviesListViewController {
     
     func setTableViewBackground() {
         let view = UIImageView(frame: moviesListTableView.frame)

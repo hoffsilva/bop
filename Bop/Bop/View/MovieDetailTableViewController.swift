@@ -13,7 +13,7 @@ class MovieDetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +30,7 @@ class MovieDetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 5
     }
     
     @IBAction func closeDetail() {

@@ -10,5 +10,5 @@ target 'Bop' do
 	pod 'SwiftyJSON'
 	pod 'SDWebImage', '~> 4.0'
 	pod "Hero"
-
+	pod 'SwiftyPlistManager'
 end
