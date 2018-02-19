@@ -24,7 +24,8 @@ class MoviesListViewModel {
     weak var delegate: MoviesListDelegate?
     
     var searchParameter: Observable<String>!
-    var currentMovie: Observable<Int>!
+    
+    var currentMovie: Int!
     
     var arrayMovie: [Movie]?
     
@@ -72,23 +73,13 @@ class MoviesListViewModel {
     
     // MARK - Data object methods
     
-    func posterPath() -> String {
-        let movie = arrayMovie![currentMovie.value!]
-        return "\(ConstantsUtil.defaultPosterURL())\(movie.posterPath!)"
+    func movieObject() -> Movie {
+        let movie = arrayMovie![currentMovie!]
+        return movie
     }
-//    static let backdropPath = "backdrop_path"
-//    static let genreIds = "genre_ids"
-//    static let voteCount = "vote_count"
-//    static let overview = "overview"
-//    static let originalTitle = "original_title"
-//    static let popularity = "popularity"
-//    static let releaseDate = "release_date"
-//    static let id = "id"
-//    static let video = "video"
-//    static let originalLanguage = "original_language"
-//    static let voteAverage = "vote_average"
-//    static let title = "title"
-//    static let adult = "adult"
-    
+
+    func genreIds() -> [Int] {
+        return arrayMovie![currentMovie!].genreIds ?? [Int]()
+    }
     
 }

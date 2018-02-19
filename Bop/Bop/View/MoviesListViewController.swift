@@ -16,6 +16,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     
+    var currentMovie: Int!
     let moviesListViewModel = MoviesListViewModel()
     
     override func viewDidLoad() {
@@ -50,15 +51,25 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell", for: indexPath) as! MoviesListTableViewCell
+        moviesListViewModel.currentMovie = indexPath.row
         cell.genresListCollectionView.delegate = self
         cell.genresListCollectionView.dataSource = self
-        cell.posterImageView.sd_setShowActivityIndicatorView(true)
-        cell.posterImageView.sd_setImage(with: URL(string: moviesListViewModel.posterPath()), completed: nil)
+        cell.posterImageView.sd_setImage(with: URL(string: "\(ConstantsUtil.defaultPosterURL())\(moviesListViewModel.movieObject().posterPath ?? "")"), completed: nil)
+        cell.movieTitleLabel.text = moviesListViewModel.movieObject().title ?? ""
+        cell.releaseDateLabel.text = moviesListViewModel.movieObject().releaseDate ?? ""
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailMovie" {
+            let detailMovie = segue.destination as! MovieDetailTableViewController
+            detailMovie.movie = moviesListViewModel.movieObject()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        moviesListViewModel.currentMovie = indexPath.row
+        performSegue(withIdentifier: "detailMovie", sender: self)
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "movieDetail")
         Hero.shared.defaultAnimation = .zoom
         Hero.shared.animate()
@@ -84,13 +95,13 @@ extension MoviesListViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return moviesListViewModel.movieObject().genreIds?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genreCollectionViewCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genreCollectionViewCell", for: indexPath) as! GenresListCollectionViewCell
         
-        // Configure the cell
+        cell.genreImageView.image = UIImage(imageLiteralResourceName: "\(String(describing: moviesListViewModel.genreIds()[indexPath.row]))")
         
         return cell
     }

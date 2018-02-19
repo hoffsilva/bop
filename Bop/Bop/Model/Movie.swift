@@ -43,6 +43,10 @@ public class Movie: NSCoding {
   public var voteAverage: Float?
   public var title: String?
   public var adult: Bool? = false
+    
+    init() {
+        
+    }
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
