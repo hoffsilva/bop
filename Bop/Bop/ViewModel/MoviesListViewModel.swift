@@ -39,11 +39,8 @@ class MoviesListViewModel {
     
     
     func loadMovies() {
-        Alamofire.request(ConstantsUtil.upcomigMoviesURL()).responseJSON { (response) in
+        ServiceConnection.fetchData(endPointURL: ConstantsUtil.upcomigMoviesURL()) { (response) in
             print(response)
-            
-
-            
         }
     }
     
