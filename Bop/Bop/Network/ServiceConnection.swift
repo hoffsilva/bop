@@ -18,6 +18,7 @@ class ServiceConnection {
     static func fetchData(endPointURL: String, responseJSON: @escaping obj) {
         
         if !verifyConnection() {
+            
             return
         }
         

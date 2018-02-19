@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 import Hero
 
 class MoviesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -15,7 +16,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     
-    let viewModel = MoviesListViewModel()
+    let moviesListViewModel = MoviesListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,8 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         moviesListTableView.dataSource = self
         moviesSearchBar.delegate = self
         setTableViewBackground()
-        
-        viewModel.loadMovies()
+        moviesListViewModel.delegate = self
+        moviesListViewModel.loadMovies()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,7 +40,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return moviesListViewModel.numberOfMovies
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -51,6 +52,8 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell", for: indexPath) as! MoviesListTableViewCell
         cell.genresListCollectionView.delegate = self
         cell.genresListCollectionView.dataSource = self
+        cell.posterImageView.sd_setShowActivityIndicatorView(true)
+        cell.posterImageView.sd_setImage(with: URL(string: moviesListViewModel.posterPath()), completed: nil)
         return cell
     }
     
@@ -97,6 +100,16 @@ extension MoviesListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
+    }
+}
+
+extension MoviesListViewController: MoviesListDelegate {
+    func didFinishLoading() {
+        moviesListTableView.reloadData()
+    }
+    
+    func didFailLoading(with errorMessage: String, code errorCode: Int?) {
+        print(errorMessage)
     }
 }
 

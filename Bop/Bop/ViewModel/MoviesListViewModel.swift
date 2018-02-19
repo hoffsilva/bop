@@ -21,7 +21,10 @@ protocol MoviesListDelegate: class {
 
 class MoviesListViewModel {
     
+    weak var delegate: MoviesListDelegate?
+    
     var searchParameter: Observable<String>!
+    var currentMovie: Observable<Int>!
     
     var arrayMovie: [Movie]?
     
@@ -39,10 +42,53 @@ class MoviesListViewModel {
     
     
     func loadMovies() {
+        var tempArray = [Movie]()
         ServiceConnection.fetchData(endPointURL: ConstantsUtil.upcomigMoviesURL()) { (response) in
-            print(response)
+            if response.error != nil {
+                self.delegate?.didFailLoading(with: "Error", code: nil)
+            } else {
+                let dictionary = response.result.value as! [String:AnyObject]
+                let arrayResults = dictionary["results"] as! [[String:Any]]
+                self.lastPage = dictionary["total_pages"] as! Int
+                for item in arrayResults {
+                    let movie = Movie(object: item)
+                    tempArray.append(movie)
+                }
+                self.arrayMovie = tempArray
+                self.delegate?.didFinishLoading()
+            }
         }
     }
+    
+    func searchMovies() {
+        arraySearchedMovie = [Movie]()
+        for movie in arrayMovie! {
+            if (((movie.title?.range(of: self.searchParameter.value!)) != nil)) || (((movie.originalTitle?.range(of: self.searchParameter.value!)) != nil)) || (((movie.overview?.range(of: self.searchParameter.value!)) != nil)) {
+                arraySearchedMovie?.append(movie)
+            }
+        }
+    }
+    
+    
+    // MARK - Data object methods
+    
+    func posterPath() -> String {
+        let movie = arrayMovie![currentMovie.value!]
+        return "\(ConstantsUtil.defaultPosterURL())\(movie.posterPath!)"
+    }
+//    static let backdropPath = "backdrop_path"
+//    static let genreIds = "genre_ids"
+//    static let voteCount = "vote_count"
+//    static let overview = "overview"
+//    static let originalTitle = "original_title"
+//    static let popularity = "popularity"
+//    static let releaseDate = "release_date"
+//    static let id = "id"
+//    static let video = "video"
+//    static let originalLanguage = "original_language"
+//    static let voteAverage = "vote_average"
+//    static let title = "title"
+//    static let adult = "adult"
     
     
 }
