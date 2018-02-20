@@ -26,12 +26,11 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         moviesSearchBar.delegate = self
         setTableViewBackground()
         moviesListViewModel.delegate = self
-        moviesListViewModel.loadMovies()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        moviesListViewModel.loadMovies()
     }
 
     // MARK: - Table view data source
@@ -48,6 +47,13 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         return tableView.frame.height - 60
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailMovie" {
+            let dest = segue.destination as! MovieDetailTableViewController
+            //TODO moviesListTableView.indexPathForSelectedRow?.row Alterar a forma de pegar os dados da viewmodel trazendo o array para a view.
+            dest.movie = moviesListViewModel.movieObject()
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell", for: indexPath) as! MoviesListTableViewCell
@@ -60,20 +66,13 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailMovie" {
-            let detailMovie = segue.destination as! MovieDetailTableViewController
-            detailMovie.movie = moviesListViewModel.movieObject()
-        }
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         moviesListViewModel.currentMovie = indexPath.row
-        performSegue(withIdentifier: "detailMovie", sender: self)
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "movieDetail")
-        Hero.shared.defaultAnimation = .zoom
-        Hero.shared.animate()
-        hero_replaceViewController(with: vc)
+        self.performSegue(withIdentifier: "detailMovie", sender: self)
+//        let vc = self.storyboard!.instantiateViewController(withIdentifier: "movieDetail")
+//        Hero.shared.defaultAnimation = .zoom
+//        Hero.shared.animate()
+//        hero_replaceViewController(with: vc)
     }
 
     @IBAction func changeLanguage() {

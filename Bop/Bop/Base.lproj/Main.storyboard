@@ -219,12 +219,12 @@
                         <outlet property="moviesListTableView" destination="oZT-Es-UPk" id="3S8-L9-FWY"/>
                         <outlet property="moviesSearchBar" destination="awj-qr-4Az" id="6AJ-wo-44d"/>
                         <outlet property="navigationBar" destination="5kp-7I-khh" id="8ce-Kl-Tw4"/>
-                        <segue destination="WqY-lk-7ki" kind="show" identifier="detailMovie" id="oDL-3L-zeR"/>
+                        <segue destination="WqY-lk-7ki" kind="show" identifier="detailMovie" id="uFn-jV-fwO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qa2-om-L2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-410.39999999999998" y="-39.130434782608695"/>
+            <point key="canvasLocation" x="-386" y="-52"/>
         </scene>
         <!--Change Language View Controller-->
         <scene sceneID="sYC-Ar-gcu">
