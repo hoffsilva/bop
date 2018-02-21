@@ -8,10 +8,31 @@
 
 import Foundation
 
-protocol languagesListDelegate: class {
+protocol LanguagesListDelegate: class {
+    /// Called when request for Languages list has finished loading
+    func didFinishLoading()
     
+    /// Called if request for Languages list has failed
+    ///
+    /// - Parameter errorMessage: Message describing error
+    func didFailLoading(with errorMessage: String, code errorCode: Int?)
 }
 
 class languagesListViewModel {
-    //todo 
+    
+    weak var delegate: LanguagesListDelegate?
+    var arrayLanguages = [String]()
+    
+    var numberOfLanguages: Int {
+        return arrayLanguages.count
+    }
+    
+    func loadLanguages() {
+        
+        ServiceConnection.fetchData(endPointURL: ConstantsUtil.translatesURL()) { (response) in
+            
+        }
+        
+        
+    }
 }
