@@ -18,21 +18,29 @@ protocol LanguagesListDelegate: class {
     func didFailLoading(with errorMessage: String, code errorCode: Int?)
 }
 
-class languagesListViewModel {
+class LanguagesListViewModel {
     
     weak var delegate: LanguagesListDelegate?
     var arrayLanguages = [String]()
+    var selectedLanguage = ""
     
     var numberOfLanguages: Int {
         return arrayLanguages.count
     }
     
     func loadLanguages() {
-        
         ServiceConnection.fetchData(endPointURL: ConstantsUtil.translatesURL()) { (response) in
-            
+            if response.error != nil {
+                self.delegate?.didFailLoading(with: "Error", code: nil)
+            } else {
+                let dictionary = response.result.value as! [String]
+                self.arrayLanguages = dictionary
+                self.delegate?.didFinishLoading()
+            }
         }
-        
-        
+    }
+    
+    func setNewLanguage() {
+        ConstantsUtil.setDefaultLanguage(language: selectedLanguage)
     }
 }

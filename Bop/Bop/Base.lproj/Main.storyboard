@@ -284,6 +284,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="btc-mX-BIK"/>
                     </view>
+                    <connections>
+                        <outlet property="languagesListPickerView" destination="h9n-Yz-cF4" id="ita-I5-WdY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZX-TO-U2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

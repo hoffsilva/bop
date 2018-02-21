@@ -19,7 +19,7 @@ class ConstantsUtil {
     }
     
     static func setDefaultLanguage(language: String) {
-        plist.save("\(language)", forKey: "default_language", toPlistWithName: "Constants") { (error) in
+        plist.save("&language=\(language)", forKey: "default_language", toPlistWithName: "Constants") { (error) in
             
         }
     }
@@ -34,6 +34,7 @@ class ConstantsUtil {
         guard let apiKey =  plist.fetchValue(for: "api_key", fromPlistWithName: "Constants") else {return ""}
         guard let translates =  plist.fetchValue(for: "GET_TRANSLATES", fromPlistWithName: "Constants") else {return ""}
         //https://api.themoviedb.org/3/configuration/primary_translations?api_key=<<api_key>>
+        print("\(mainURL as! String)\(translates as! String)\(apiKey as! String)")
         return "\(mainURL as! String)\(translates as! String)\(apiKey as! String)"
     }
     

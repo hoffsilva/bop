@@ -22,7 +22,7 @@ class ServiceConnection {
             return
         }
         
-        Alamofire.request(ConstantsUtil.upcomigMoviesURL()).responseJSON { (response) in
+        Alamofire.request(endPointURL).responseJSON { (response) in
             responseJSON(response)
         }
         
