@@ -8,3 +8,10 @@
 
 import Foundation
 
+protocol languagesListDelegate: class {
+    
+}
+
+class languagesListViewModel {
+    //todo 
+}
