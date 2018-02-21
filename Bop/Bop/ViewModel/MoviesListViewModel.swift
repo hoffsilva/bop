@@ -27,14 +27,14 @@ class MoviesListViewModel {
     
     var currentMovie: Int!
     
-    var arrayMovie: [Movie]?
+    var arrayMovie = [Movie]()
     
     var arraySearchedMovie: [Movie]?
     
     var lastPage: Int!
     
     var numberOfMovies: Int {
-        return arrayMovie?.count ?? 0
+        return arrayMovie.count 
     }
     
     var numberOfSeachedMovies: Int {
@@ -43,7 +43,6 @@ class MoviesListViewModel {
     
     
     func loadMovies() {
-        var tempArray = [Movie]()
         ServiceConnection.fetchData(endPointURL: ConstantsUtil.upcomigMoviesURL()) { (response) in
             if response.error != nil {
                 self.delegate?.didFailLoading(with: "Error", code: nil)
@@ -53,9 +52,8 @@ class MoviesListViewModel {
                 self.lastPage = dictionary["total_pages"] as! Int
                 for item in arrayResults {
                     let movie = Movie(object: item)
-                    tempArray.append(movie)
+                    self.arrayMovie.append(movie)
                 }
-                self.arrayMovie = tempArray
                 self.delegate?.didFinishLoading()
             }
         }
@@ -63,7 +61,7 @@ class MoviesListViewModel {
     
     func searchMovies() {
         arraySearchedMovie = [Movie]()
-        for movie in arrayMovie! {
+        for movie in arrayMovie {
             if (((movie.title?.range(of: self.searchParameter.value!)) != nil)) || (((movie.originalTitle?.range(of: self.searchParameter.value!)) != nil)) || (((movie.overview?.range(of: self.searchParameter.value!)) != nil)) {
                 arraySearchedMovie?.append(movie)
             }
@@ -74,12 +72,16 @@ class MoviesListViewModel {
     // MARK - Data object methods
     
     func movieObject() -> Movie {
-        let movie = arrayMovie![currentMovie!]
+        let movie = arrayMovie[currentMovie!]
         return movie
+    }
+    
+    func selectMovieBy(row: Int) -> Movie {
+        return arrayMovie[row]
     }
 
     func genreIds() -> [Int] {
-        return arrayMovie![currentMovie!].genreIds ?? [Int]()
+        return arrayMovie[currentMovie!].genreIds ?? [Int]()
     }
     
 }

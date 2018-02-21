@@ -14,8 +14,8 @@ class ConstantsUtil {
     private static let plist = SwiftyPlistManager.shared
 
     static func setDefaultPageNumber(pageNumber: String) {
-        plist.save("\(pageNumber)", forKey: "default_page_number", toPlistWithName: "Constants") { (error) in
-            
+        plist.save("&page=\(pageNumber)", forKey: "default_page_number", toPlistWithName: "Constants") { (error) in
+            print(error)
         }
     }
     
@@ -45,6 +45,7 @@ class ConstantsUtil {
         guard let defaultLanguage =  plist.fetchValue(for: "default_language", fromPlistWithName: "Constants") else {return ""}
         guard let defaultPageNumber =  plist.fetchValue(for: "default_page_number", fromPlistWithName: "Constants") else {return ""}
         //https://api.themoviedb.org/3/movie/upcoming?api_key=1f54bd990f1cdfb230adb312546d765d&language=pt-BR
+        print("\(mainURL as! String)\(upcomingMovies as! String)\(apiKey as! String)\(defaultLanguage as! String)\(defaultPageNumber as! String)")
         return "\(mainURL as! String)\(upcomingMovies as! String)\(apiKey as! String)\(defaultLanguage as! String)\(defaultPageNumber as! String)"
     }
     

@@ -17,6 +17,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     
     var currentMovie: Int!
+    var currentPage = 2
     let moviesListViewModel = MoviesListViewModel()
     
     override func viewDidLoad() {
@@ -27,9 +28,10 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         setTableViewBackground()
         moviesListViewModel.delegate = self
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        pleaseWait()
         moviesListViewModel.loadMovies()
     }
 
@@ -50,14 +52,16 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailMovie" {
             let dest = segue.destination as! MovieDetailTableViewController
-            //TODO moviesListTableView.indexPathForSelectedRow?.row Alterar a forma de pegar os dados da viewmodel trazendo o array para a view.
-            dest.movie = moviesListViewModel.movieObject()
+            print(moviesListViewModel.selectMovieBy(row: currentMovie).dictionaryRepresentation().description)
+            dest.movie = moviesListViewModel.selectMovieBy(row: currentMovie)
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell", for: indexPath) as! MoviesListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell") as! MoviesListTableViewCell
+        //tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell", for: indexPath) as! MoviesListTableViewCell
         moviesListViewModel.currentMovie = indexPath.row
+        cell.genresListCollectionView.reloadData()
         cell.genresListCollectionView.delegate = self
         cell.genresListCollectionView.dataSource = self
         cell.posterImageView.sd_setImage(with: URL(string: "\(ConstantsUtil.defaultPosterURL())\(moviesListViewModel.movieObject().posterPath ?? "")"), completed: nil)
@@ -67,12 +71,20 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        moviesListViewModel.currentMovie = indexPath.row
-        self.performSegue(withIdentifier: "detailMovie", sender: self)
-//        let vc = self.storyboard!.instantiateViewController(withIdentifier: "movieDetail")
-//        Hero.shared.defaultAnimation = .zoom
-//        Hero.shared.animate()
-//        hero_replaceViewController(with: vc)
+        currentMovie = indexPath.row
+        performSegue(withIdentifier: "detailMovie", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == moviesListViewModel.numberOfMovies-1 {
+            if currentPage <= moviesListViewModel.lastPage {
+                ConstantsUtil.setDefaultPageNumber(pageNumber: "\(currentPage)")
+                currentPage += 1
+                moviesListViewModel.loadMovies()
+                pleaseWait()
+            }
+        }
     }
 
     @IBAction func changeLanguage() {
@@ -87,21 +99,17 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
 
 extension MoviesListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return moviesListViewModel.movieObject().genreIds?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genreCollectionViewCell", for: indexPath) as! GenresListCollectionViewCell
-        
+        print(moviesListViewModel.genreIds()[indexPath.row])
         cell.genreImageView.image = UIImage(imageLiteralResourceName: "\(String(describing: moviesListViewModel.genreIds()[indexPath.row]))")
-        
         return cell
     }
 }
@@ -115,6 +123,7 @@ extension MoviesListViewController: UISearchBarDelegate {
 
 extension MoviesListViewController: MoviesListDelegate {
     func didFinishLoading() {
+        clearAllNotice()
         moviesListTableView.reloadData()
     }
     
@@ -133,4 +142,5 @@ extension MoviesListViewController {
         view.alpha = 0.3
         moviesListTableView.backgroundView = view
     }
+    
 }

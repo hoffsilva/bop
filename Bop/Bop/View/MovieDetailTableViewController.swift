@@ -15,6 +15,7 @@ class MovieDetailTableViewController: UITableViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var overviewTextView: UITextView!
+    @IBOutlet weak var aa: UICollectionView!
     
     let moviesListViewModel = MoviesListViewModel()
     var movie = Movie()
@@ -22,6 +23,8 @@ class MovieDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataMovieInFields()
+        aa.delegate = self
+        aa.dataSource = self
     }
 
     // MARK: - Table view data source
@@ -35,10 +38,7 @@ class MovieDetailTableViewController: UITableViewController {
     }
     
     @IBAction func closeDetail() {
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "moviesList")
-        Hero.shared.defaultAnimation = .zoomOut
-        Hero.shared.animate()
-        hero_replaceViewController(with: vc)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setDataMovieInFields() {
@@ -62,8 +62,8 @@ extension MovieDetailTableViewController: UICollectionViewDataSource, UICollecti
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(movie.genreIds?.description)
         return (movie.genreIds?.count)!
     }
     
