@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import Hero
+import FCAlertView
 
 class MoviesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -66,6 +67,8 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.genresListCollectionView.reloadData()
         cell.genresListCollectionView.delegate = self
         cell.genresListCollectionView.dataSource = self
+        cell.posterImageView.sd_addActivityIndicator()
+        cell.posterImageView.sd_setShowActivityIndicatorView(true)
         cell.posterImageView.sd_setImage(with: URL(string: "\(ConstantsUtil.defaultPosterURL())\(moviesListViewModel.movieObject().posterPath ?? "")"), completed: nil)
         cell.movieTitleLabel.text = moviesListViewModel.movieObject().title ?? ""
         cell.releaseDateLabel.text = moviesListViewModel.movieObject().releaseDate ?? ""
@@ -143,7 +146,11 @@ extension MoviesListViewController: MoviesListDelegate {
     
     func didFailLoading(with errorMessage: String, code errorCode: Int?) {
         clearAllNotice()
-        
+        let alert = FCAlertView()
+        alert.hideDoneButton = true
+        alert.makeAlertTypeWarning()
+        alert.showAlert(withTitle: "Error", withSubtitle: errorMessage, withCustomImage: nil, withDoneButtonTitle: nil, andButtons: nil)
+        alert.dismissOnOutsideTouch = true
     }
 }
 

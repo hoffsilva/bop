@@ -8,6 +8,7 @@
 
 import UIKit
 import Hero
+import FCAlertView
 
 class ChangeLanguageViewController: UIViewController {
     
@@ -54,6 +55,11 @@ extension ChangeLanguageViewController: LanguagesListDelegate {
     
     func didFailLoading(with errorMessage: String, code errorCode: Int?) {
         clearAllNotice()
+        let alert = FCAlertView()
+        alert.hideDoneButton = true
+        alert.makeAlertTypeWarning()
+        alert.showAlert(withTitle: "Error", withSubtitle: errorMessage, withCustomImage: nil, withDoneButtonTitle: nil, andButtons: nil)
+        alert.dismissOnOutsideTouch = true
     }
 }
 
