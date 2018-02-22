@@ -28,7 +28,7 @@ class LanguagesListViewModel {
     var selectedLanguage = ""
     
     var numberOfLanguages: Int {
-        return arrayLanguages.count
+        return arrayHandledLanguage.count
     }
     
     func loadTranslates() {
@@ -95,6 +95,12 @@ class LanguagesListViewModel {
                 }
             }
         }
+    }
+    
+    func handledNameOfLanguage(_ row: Int) -> String {
+        let lang = arrayHandledLanguage[row].language ?? ""
+        let country = arrayHandledLanguage[row].country ?? ""
+        return "\(lang) - \(country)"
     }
     
     func setNewLanguage() {

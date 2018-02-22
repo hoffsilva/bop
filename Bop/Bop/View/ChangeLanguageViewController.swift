@@ -57,12 +57,10 @@ extension ChangeLanguageViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-//        languagesListViewModel.selectedLanguage = languagesListViewModel.arrayLanguages[row]
+        languagesListViewModel.selectedLanguage = languagesListViewModel.arrayHandledLanguage[row].handledLanguage!
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return languagesListViewModel.arrayLanguages[row]
-        return ""
+        return languagesListViewModel.handledNameOfLanguage(row)
     }
 }
