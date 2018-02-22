@@ -23,6 +23,16 @@ class ChangeLanguageViewController: UIViewController {
         languagesListViewModel.loadTranslates()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pleaseWait()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        clearAllNotice()
+    }
+    
     @IBAction func giveUpChangeLanguage() {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "moviesList")
         Hero.shared.defaultAnimation = .zoomSlide(direction: HeroDefaultAnimationType.Direction.right)
@@ -43,7 +53,7 @@ extension ChangeLanguageViewController: LanguagesListDelegate {
     }
     
     func didFailLoading(with errorMessage: String, code errorCode: Int?) {
-        
+        clearAllNotice()
     }
 }
 
@@ -63,4 +73,5 @@ extension ChangeLanguageViewController: UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return languagesListViewModel.handledNameOfLanguage(row)
     }
+    
 }

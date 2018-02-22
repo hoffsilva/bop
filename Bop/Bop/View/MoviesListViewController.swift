@@ -20,6 +20,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     var currentPage = 2
     let moviesListViewModel = MoviesListViewModel()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesListTableView.delegate = self
@@ -141,7 +142,8 @@ extension MoviesListViewController: MoviesListDelegate {
     }
     
     func didFailLoading(with errorMessage: String, code errorCode: Int?) {
-        print(errorMessage)
+        clearAllNotice()
+        
     }
 }
 

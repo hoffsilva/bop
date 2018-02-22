@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import FCAlertView
+
 
 typealias obj = (Alamofire.DataResponse<Any>) -> Swift.Void
 
@@ -18,10 +20,13 @@ class ServiceConnection {
     static func fetchData(endPointURL: String, responseJSON: @escaping obj) {
         
         if !verifyConnection() {
-            
+            let alert = FCAlertView()
+            alert.showAlert(withTitle: "Error", withSubtitle: "The internet connection has some problem", withCustomImage: #imageLiteral(resourceName: "languade_bg"), withDoneButtonTitle: nil, andButtons: nil)
+            alert.dismissOnOutsideTouch = true
+            alert.hideDoneButton = true
+            alert.makeAlertTypeCaution()
             return
         }
-        let url = "https://api.themoviedb.org/3/search/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&query=panther&page=1​&include_adult=false"
         Alamofire.request(endPointURL.trimmingCharacters(in: .whitespaces)).responseJSON { (response) in
             responseJSON(response)
         }
