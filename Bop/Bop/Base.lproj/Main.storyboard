@@ -44,7 +44,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="500" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oZT-Es-UPk">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search movies" id="awj-qr-4Az" customClass="BindingSearchBar" customModule="Bop" customModuleProvider="target">
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search movies" id="awj-qr-4Az">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -234,6 +234,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="languade_bg" translatesAutoresizingMaskIntoConstraints="NO" id="etr-8k-GOl">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9n-Yz-cF4">
                                 <rect key="frame" x="16" y="124" width="288" height="320"/>
                                 <constraints>
@@ -260,7 +264,7 @@
                                     <constraint firstAttribute="height" constant="44" id="lV9-XV-FiF"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Select Language" id="jbG-9O-cW5">
+                                    <navigationItem id="jbG-9O-cW5">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GQq-pY-HBx">
                                             <connections>
                                                 <action selector="giveUpChangeLanguage" destination="Eau-4V-3vv" id="sfc-Uu-84q"/>
@@ -282,16 +286,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="btc-mX-BIK" firstAttribute="trailing" secondItem="mWc-b4-qg1" secondAttribute="trailing" id="1vf-Ku-LX5"/>
+                            <constraint firstItem="etr-8k-GOl" firstAttribute="bottom" secondItem="btc-mX-BIK" secondAttribute="bottom" id="3gz-q2-0n0"/>
+                            <constraint firstItem="etr-8k-GOl" firstAttribute="leading" secondItem="btc-mX-BIK" secondAttribute="leading" id="4Kw-yt-Nxo"/>
                             <constraint firstItem="btc-mX-BIK" firstAttribute="trailing" secondItem="h9n-Yz-cF4" secondAttribute="trailing" constant="16" id="5hr-i0-xAN"/>
                             <constraint firstItem="ML0-u1-DJn" firstAttribute="centerX" secondItem="Mlk-Jp-Pye" secondAttribute="centerX" constant="-0.5" id="Fuu-L6-PxM"/>
                             <constraint firstItem="h9n-Yz-cF4" firstAttribute="centerY" secondItem="Mlk-Jp-Pye" secondAttribute="centerY" id="IMh-IV-SCy"/>
                             <constraint firstItem="mWc-b4-qg1" firstAttribute="top" secondItem="btc-mX-BIK" secondAttribute="top" id="Q2j-FD-Gv7"/>
                             <constraint firstItem="mWc-b4-qg1" firstAttribute="leading" secondItem="Mlk-Jp-Pye" secondAttribute="leading" id="VRQ-Vo-nqO"/>
+                            <constraint firstItem="etr-8k-GOl" firstAttribute="trailing" secondItem="btc-mX-BIK" secondAttribute="trailing" id="eLa-xd-RyH"/>
                             <constraint firstItem="5SF-cj-xDf" firstAttribute="leading" secondItem="btc-mX-BIK" secondAttribute="leading" constant="8" id="eaY-IK-40N"/>
                             <constraint firstItem="h9n-Yz-cF4" firstAttribute="leading" secondItem="btc-mX-BIK" secondAttribute="leading" constant="16" id="ez3-3u-azk"/>
                             <constraint firstItem="btc-mX-BIK" firstAttribute="trailing" secondItem="5SF-cj-xDf" secondAttribute="trailing" constant="8" id="hdI-al-DAE"/>
                             <constraint firstItem="h9n-Yz-cF4" firstAttribute="centerX" secondItem="Mlk-Jp-Pye" secondAttribute="centerX" id="hwM-GH-eV4"/>
                             <constraint firstItem="ML0-u1-DJn" firstAttribute="top" secondItem="h9n-Yz-cF4" secondAttribute="bottom" constant="10" id="iNv-NS-3hX"/>
+                            <constraint firstItem="etr-8k-GOl" firstAttribute="top" secondItem="mWc-b4-qg1" secondAttribute="bottom" id="soT-Zq-NML"/>
                             <constraint firstItem="5SF-cj-xDf" firstAttribute="centerX" secondItem="Mlk-Jp-Pye" secondAttribute="centerX" id="u4M-Uw-9g6"/>
                             <constraint firstItem="5SF-cj-xDf" firstAttribute="top" secondItem="mWc-b4-qg1" secondAttribute="bottom" constant="20" id="vTB-ar-QNU"/>
                         </constraints>
@@ -538,6 +546,7 @@
     <resources>
         <image name="12" width="133" height="150"/>
         <image name="cancel" width="24" height="24"/>
+        <image name="languade_bg" width="640" height="439"/>
         <image name="settings" width="24" height="24"/>
     </resources>
 </document>

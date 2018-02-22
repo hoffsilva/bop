@@ -18,5 +18,9 @@
 	<string>/search/movie</string>
 	<key>GET_TRANSLATES</key>
 	<string>/configuration/primary_translations</string>
+	<key>GET_COUNTRIES</key>
+	<string>/configuration/countries</string>
+	<key>GET_LANGUAGES</key>
+	<string>/configuration/languages</string>
 </dict>
 </plist>

@@ -20,7 +20,7 @@ class ChangeLanguageViewController: UIViewController {
         languagesListViewModel.delegate = self
         languagesListPickerView.delegate = self
         languagesListPickerView.dataSource = self
-        languagesListViewModel.loadLanguages()
+        languagesListViewModel.loadTranslates()
     }
     
     @IBAction func giveUpChangeLanguage() {
@@ -57,10 +57,12 @@ extension ChangeLanguageViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        languagesListViewModel.selectedLanguage = languagesListViewModel.arrayLanguages[row]
+        
+//        languagesListViewModel.selectedLanguage = languagesListViewModel.arrayLanguages[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return languagesListViewModel.arrayLanguages[row]
+//        return languagesListViewModel.arrayLanguages[row]
+        return ""
     }
 }

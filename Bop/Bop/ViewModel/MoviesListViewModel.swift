@@ -40,7 +40,7 @@ class MoviesListViewModel {
     
     func loadMovies() {
         if isSearchingMovies {
-            ServiceConnection.fetchData(endPointURL: ConstantsUtil.searchMoviesURL()+searchParameter, responseJSON: { (response) in
+            ServiceConnection.fetchData(endPointURL: ConstantsUtil.searchMoviesURL(searchParameter), responseJSON: { (response) in
                 self.serviceTask(response: response)
             })
         } else {
@@ -52,14 +52,21 @@ class MoviesListViewModel {
         
     
     func serviceTask(response : DataResponse<Any>) {
-        let dictionary = response.result.value as! [String:AnyObject]
-        let arrayResults = dictionary["results"] as! [[String:Any]]
-        self.lastPage = dictionary["total_pages"] as! Int
-        for item in arrayResults {
-            let movie = Movie(object: item)
-            self.arrayMovie.append(movie)
+        
+        if response.result.value != nil {
+            let dictionary = response.result.value as! [String:AnyObject]
+            let arrayResults = dictionary["results"] as! [[String:Any]]
+            self.lastPage = dictionary["total_pages"] as! Int
+            for item in arrayResults {
+                let movie = Movie(object: item)
+                self.arrayMovie.append(movie)
+            }
+            self.delegate?.didFinishLoading()
+        } else {
+            self.delegate?.didFailLoading(with: response.result.description, code: nil)
         }
-        self.delegate?.didFinishLoading()
+        
+        
     }
     
     

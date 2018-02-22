@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4344EDD4203E4181003D9F03 /* BindingSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */; };
+		435100D7203F2D8D00F65310 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435100D5203F2D8D00F65310 /* Country.swift */; };
+		435100D8203F2D8D00F65310 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435100D6203F2D8D00F65310 /* Language.swift */; };
+		435100DA203F2E6900F65310 /* HandledLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435100D9203F2E6800F65310 /* HandledLanguage.swift */; };
 		436666D22038B07A00E91863 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436666D12038B07A00E91863 /* AppDelegate.swift */; };
 		436666D72038B07A00E91863 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 436666D52038B07A00E91863 /* Main.storyboard */; };
 		436666D92038B07A00E91863 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 436666D82038B07A00E91863 /* Assets.xcassets */; };
@@ -31,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingSearchBar.swift; sourceTree = "<group>"; };
+		435100D5203F2D8D00F65310 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		435100D6203F2D8D00F65310 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		435100D9203F2E6800F65310 /* HandledLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandledLanguage.swift; sourceTree = "<group>"; };
 		436666CE2038B07A00E91863 /* Bop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		436666D12038B07A00E91863 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		436666D62038B07A00E91863 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +144,9 @@
 		436666E82038DC4D00E91863 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				435100D9203F2E6800F65310 /* HandledLanguage.swift */,
+				435100D5203F2D8D00F65310 /* Country.swift */,
+				435100D6203F2D8D00F65310 /* Language.swift */,
 				436666F1203913D600E91863 /* Movie.swift */,
 			);
 			path = Model;
@@ -324,10 +333,13 @@
 				4344EDD4203E4181003D9F03 /* BindingSearchBar.swift in Sources */,
 				436666F2203913D600E91863 /* Movie.swift in Sources */,
 				43EC9F2F203A3815000CEC14 /* SwiftNotice.swift in Sources */,
+				435100D8203F2D8D00F65310 /* Language.swift in Sources */,
 				436666D22038B07A00E91863 /* AppDelegate.swift in Sources */,
 				436666EC2038DE4600E91863 /* MoviesListTableViewCell.swift in Sources */,
 				43EC9F37203A7A1C000CEC14 /* LanguagesListViewModel.swift in Sources */,
 				43EC9F31203A3D72000CEC14 /* ConstantsUtil.swift in Sources */,
+				435100D7203F2D8D00F65310 /* Country.swift in Sources */,
+				435100DA203F2E6900F65310 /* HandledLanguage.swift in Sources */,
 				43EC9F39203AEED1000CEC14 /* ServiceConnection.swift in Sources */,
 				43EC9F2C203A3210000CEC14 /* GenresListCollectionViewController.swift in Sources */,
 				43EC9F252039D5AD000CEC14 /* ChangeLanguageViewController.swift in Sources */,

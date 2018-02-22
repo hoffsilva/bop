@@ -14,11 +14,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var moviesListTableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var moviesSearchBar: BindingSearchBar!{
-        didSet {
-            moviesSearchBar.bind{ self.moviesListViewModel.searchParameter = $0 } 
-        }
-    }
+    @IBOutlet weak var moviesSearchBar: BindingSearchBar!
     
     var currentMovie: Int!
     var currentPage = 2
@@ -31,7 +27,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         moviesSearchBar.delegate = self
         setTableViewBackground()
         moviesListViewModel.delegate = self
-        
+        addRefreshControl()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,6 +35,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         pleaseWait()
         moviesListViewModel.loadMovies()
     }
+    
 
     // MARK: - Table view data source
 
@@ -64,7 +61,6 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell") as! MoviesListTableViewCell
-        //tableView.dequeueReusableCell(withIdentifier: "moviesListTableViewCell", for: indexPath) as! MoviesListTableViewCell
         moviesListViewModel.currentMovie = indexPath.row
         cell.genresListCollectionView.reloadData()
         cell.genresListCollectionView.delegate = self
@@ -99,7 +95,12 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         hero_replaceViewController(with: vc)
     }
     
-
+    @objc func loadMovies() {
+        moviesListViewModel.isSearchingMovies = false
+        moviesListViewModel.arrayMovie = []
+        moviesSearchBar.text = ""
+        moviesListViewModel.loadMovies()
+    }
 }
 
 extension MoviesListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -120,12 +121,15 @@ extension MoviesListViewController: UICollectionViewDataSource, UICollectionView
 }
 
 extension MoviesListViewController: UISearchBarDelegate {
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         moviesListViewModel.isSearchingMovies = true
+        moviesListViewModel.arrayMovie = []
         moviesListViewModel.loadMovies()
-        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        moviesListViewModel.searchParameter = searchText
     }
 }
 
@@ -133,6 +137,7 @@ extension MoviesListViewController: MoviesListDelegate {
     func didFinishLoading() {
         clearAllNotice()
         moviesListTableView.reloadData()
+        moviesListTableView.refreshControl?.endRefreshing()
     }
     
     func didFailLoading(with errorMessage: String, code errorCode: Int?) {
@@ -149,6 +154,12 @@ extension MoviesListViewController {
         view.contentMode = .scaleAspectFill
         view.alpha = 0.3
         moviesListTableView.backgroundView = view
+    }
+    
+    func addRefreshControl() {
+        moviesListTableView.refreshControl = UIRefreshControl()
+        moviesListTableView.refreshControl?.attributedTitle = NSAttributedString(string: "Update movies list")
+        moviesListTableView.refreshControl?.addTarget(self, action: #selector(loadMovies), for: .valueChanged)
     }
     
 }
