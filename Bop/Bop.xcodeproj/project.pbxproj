@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4344EDD4203E4181003D9F03 /* BindingSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */; };
 		436666D22038B07A00E91863 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436666D12038B07A00E91863 /* AppDelegate.swift */; };
 		436666D72038B07A00E91863 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 436666D52038B07A00E91863 /* Main.storyboard */; };
 		436666D92038B07A00E91863 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 436666D82038B07A00E91863 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingSearchBar.swift; sourceTree = "<group>"; };
 		436666CE2038B07A00E91863 /* Bop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		436666D12038B07A00E91863 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		436666D62038B07A00E91863 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				43EC9F2E203A3815000CEC14 /* SwiftNotice.swift */,
 				43EC9F27203A2358000CEC14 /* Observable.swift */,
+				4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				436666F02038EFCC00E91863 /* GenresListCollectionViewCell.swift in Sources */,
 				43EC9F2A203A24A7000CEC14 /* MoviesListViewModel.swift in Sources */,
 				436666F62039A9EC00E91863 /* MovieDetailTableViewController.swift in Sources */,
+				4344EDD4203E4181003D9F03 /* BindingSearchBar.swift in Sources */,
 				436666F2203913D600E91863 /* Movie.swift in Sources */,
 				43EC9F2F203A3815000CEC14 /* SwiftNotice.swift in Sources */,
 				436666D22038B07A00E91863 /* AppDelegate.swift in Sources */,

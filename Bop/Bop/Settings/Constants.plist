@@ -14,8 +14,8 @@
 	<string>?api_key=1f54bd990f1cdfb230adb312546d765d</string>
 	<key>GET_UPCOMING_MOVIES</key>
 	<string>/movie/upcoming</string>
-	<key>GET_GENRE</key>
-	<string>/genre/movie/list</string>
+	<key>GET_SEARCH_MOVIES</key>
+	<string>/search/movie</string>
 	<key>GET_TRANSLATES</key>
 	<string>/configuration/primary_translations</string>
 </dict>

@@ -48,4 +48,14 @@ class ConstantsUtil {
         return "\(mainURL as! String)\(upcomingMovies as! String)\(apiKey as! String)\(defaultLanguage as! String)\(defaultPageNumber as! String)"
     }
     
+    public static func searchMoviesURL() -> String {
+        guard let mainURL =  plist.fetchValue(for: "api_main_url", fromPlistWithName: "Constants") else {return ""}
+        guard let apiKey =  plist.fetchValue(for: "api_key", fromPlistWithName: "Constants") else {return ""}
+        guard let searchMovies =  plist.fetchValue(for: "GET_SEARCH_MOVIES", fromPlistWithName: "Constants") else {return ""}
+        guard let defaultLanguage =  plist.fetchValue(for: "default_language", fromPlistWithName: "Constants") else {return ""}
+        guard let defaultPageNumber =  plist.fetchValue(for: "default_page_number", fromPlistWithName: "Constants") else {return ""}
+        //https://api.themoviedb.org/3/search/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US​&query=panther
+        return "\(mainURL as! String)\(searchMovies as! String)\(apiKey as! String)\(defaultLanguage as! String)\(defaultPageNumber as! String)​&query="
+    }
+    
 }

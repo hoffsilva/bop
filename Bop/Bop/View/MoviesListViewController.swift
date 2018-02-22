@@ -14,7 +14,11 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var moviesListTableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var moviesSearchBar: UISearchBar!
+    @IBOutlet weak var moviesSearchBar: BindingSearchBar!{
+        didSet {
+            moviesSearchBar.bind{ self.moviesListViewModel.searchParameter = $0 } 
+        }
+    }
     
     var currentMovie: Int!
     var currentPage = 2
@@ -27,6 +31,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         moviesSearchBar.delegate = self
         setTableViewBackground()
         moviesListViewModel.delegate = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +123,9 @@ extension MoviesListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
+        moviesListViewModel.isSearchingMovies = true
+        moviesListViewModel.loadMovies()
+        
     }
 }
 

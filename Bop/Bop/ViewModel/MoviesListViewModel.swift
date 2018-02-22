@@ -23,13 +23,13 @@ class MoviesListViewModel {
     
     weak var delegate: MoviesListDelegate?
     
-    var searchParameter: Observable<String>!
+    var searchParameter = ""
     
     var currentMovie: Int!
     
-    var arrayMovie = [Movie]()
+    var isSearchingMovies = false
     
-    var arraySearchedMovie: [Movie]?
+    var arrayMovie = [Movie]()
     
     var lastPage: Int!
     
@@ -37,35 +37,29 @@ class MoviesListViewModel {
         return arrayMovie.count 
     }
     
-    var numberOfSeachedMovies: Int {
-        return arraySearchedMovie?.count ?? 0
-    }
-    
     
     func loadMovies() {
-        ServiceConnection.fetchData(endPointURL: ConstantsUtil.upcomigMoviesURL()) { (response) in
-            if response.error != nil {
-                self.delegate?.didFailLoading(with: "Error", code: nil)
-            } else {
-                let dictionary = response.result.value as! [String:AnyObject]
-                let arrayResults = dictionary["results"] as! [[String:Any]]
-                self.lastPage = dictionary["total_pages"] as! Int
-                for item in arrayResults {
-                    let movie = Movie(object: item)
-                    self.arrayMovie.append(movie)
-                }
-                self.delegate?.didFinishLoading()
-            }
+        if isSearchingMovies {
+            ServiceConnection.fetchData(endPointURL: ConstantsUtil.searchMoviesURL()+searchParameter, responseJSON: { (response) in
+                self.serviceTask(response: response)
+            })
+        } else {
+            ServiceConnection.fetchData(endPointURL: ConstantsUtil.upcomigMoviesURL(), responseJSON: { (response) in
+                self.serviceTask(response: response)
+            })
         }
     }
+        
     
-    func searchMovies() {
-        arraySearchedMovie = [Movie]()
-        for movie in arrayMovie {
-            if (((movie.title?.range(of: self.searchParameter.value!)) != nil)) || (((movie.originalTitle?.range(of: self.searchParameter.value!)) != nil)) || (((movie.overview?.range(of: self.searchParameter.value!)) != nil)) {
-                arraySearchedMovie?.append(movie)
-            }
+    func serviceTask(response : DataResponse<Any>) {
+        let dictionary = response.result.value as! [String:AnyObject]
+        let arrayResults = dictionary["results"] as! [[String:Any]]
+        self.lastPage = dictionary["total_pages"] as! Int
+        for item in arrayResults {
+            let movie = Movie(object: item)
+            self.arrayMovie.append(movie)
         }
+        self.delegate?.didFinishLoading()
     }
     
     
