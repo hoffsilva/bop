@@ -45,8 +45,7 @@ class ConstantsUtil {
         guard let searchMovies =  plist.fetchValue(for: "GET_SEARCH_MOVIES", fromPlistWithName: "Constants") else {return ""}
         guard let defaultLanguage =  plist.fetchValue(for: "default_language", fromPlistWithName: "Constants") else {return ""}
         guard let defaultPageNumber =  plist.fetchValue(for: "default_page_number", fromPlistWithName: "Constants") else {return ""}
-        //return "https://api.themoviedb.org/3/search/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&page=1&include_adult=false&query=Amor"
-        //return https://api.themoviedb.org/3/search/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&query=Amor&page=1&include_adult=false
+        //"https://api.themoviedb.org/3/search/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&page=1&include_adult=false&query=Amor"
         return "\(mainURL as! String)\(searchMovies as! String)\(apiKey as! String)\(defaultLanguage as! String)&query=\(searchParameter)\(defaultPageNumber as! String)".trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
