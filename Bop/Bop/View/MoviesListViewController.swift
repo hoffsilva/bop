@@ -38,13 +38,13 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         moviesListViewModel.loadMovies()
     }
     
-
+    
     // MARK: - Table view data source
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return moviesListViewModel.numberOfMovies
     }
@@ -52,11 +52,10 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.height - 60
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailMovie" {
             let dest = segue.destination as! MovieDetailTableViewController
-            print(moviesListViewModel.selectMovieBy(row: currentMovie).dictionaryRepresentation().description)
             dest.movie = moviesListViewModel.selectMovieBy(row: currentMovie)
         }
     }
@@ -91,7 +90,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
-
+    
     @IBAction func changeLanguage() {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "changeLanguage")
         Hero.shared.defaultAnimation = .zoomSlide(direction: HeroDefaultAnimationType.Direction.left)
@@ -118,7 +117,6 @@ extension MoviesListViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genreCollectionViewCell", for: indexPath) as! GenresListCollectionViewCell
-        print(moviesListViewModel.genreIds()[indexPath.row])
         cell.genreImageView.image = UIImage(imageLiteralResourceName: "\(String(describing: moviesListViewModel.genreIds()[indexPath.row]))")
         return cell
     }
@@ -148,11 +146,13 @@ extension MoviesListViewController: MoviesListDelegate {
     
     func didFailLoading(with errorMessage: String, code errorCode: Int?) {
         clearAllNotice()
+        moviesListTableView.refreshControl?.endRefreshing()
         let alert = FCAlertView()
         alert.hideDoneButton = true
         alert.makeAlertTypeWarning()
         alert.showAlert(withTitle: "Error", withSubtitle: errorMessage, withCustomImage: nil, withDoneButtonTitle: nil, andButtons: nil)
         alert.dismissOnOutsideTouch = true
+        
     }
 }
 

@@ -15,25 +15,18 @@ typealias obj = (Alamofire.DataResponse<Any>) -> Swift.Void
 
 class ServiceConnection {
     
-    
-    
     static func fetchData(endPointURL: String, responseJSON: @escaping obj) {
-        
         if !verifyConnection() {
             let alert = FCAlertView()
-            alert.showAlert(withTitle: "Error", withSubtitle: "The internet connection has some problem", withCustomImage: #imageLiteral(resourceName: "languade_bg"), withDoneButtonTitle: nil, andButtons: nil)
+            alert.showAlert(withTitle: "Error", withSubtitle: "The internet connection has some problem", withCustomImage: nil, withDoneButtonTitle: nil, andButtons: nil)
             alert.dismissOnOutsideTouch = true
             alert.hideDoneButton = true
             alert.makeAlertTypeCaution()
-            return
         }
         Alamofire.request(endPointURL.trimmingCharacters(in: .whitespaces)).responseJSON { (response) in
             responseJSON(response)
         }
-        
     }
-    
-    
     
     private static func verifyConnection() -> Bool{
         

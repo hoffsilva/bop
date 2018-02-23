@@ -49,7 +49,6 @@ class MoviesListViewModel {
             })
         }
     }
-        
     
     func serviceTask(response : DataResponse<Any>) {
         
@@ -69,7 +68,6 @@ class MoviesListViewModel {
         
     }
     
-    
     // MARK - Data object methods
     
     func movieObject() -> Movie {
@@ -80,7 +78,7 @@ class MoviesListViewModel {
     func selectMovieBy(row: Int) -> Movie {
         return arrayMovie[row]
     }
-
+    
     func genreIds() -> [Int] {
         return arrayMovie[currentMovie!].genreIds ?? [Int]()
     }

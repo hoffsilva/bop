@@ -56,7 +56,6 @@ class ConstantsUtil {
         guard let countries =  plist.fetchValue(for: "GET_COUNTRIES", fromPlistWithName: "Constants") else {return ""}
         guard let apiKey =  plist.fetchValue(for: "api_key", fromPlistWithName: "Constants") else {return ""}
         //https://api.themoviedb.org/3/configuration/countries?api_key=1f54bd990f1cdfb230adb312546d765d
-        print("\(mainURL as! String)\(countries as! String)\(apiKey as! String)".trimmingCharacters(in: .whitespacesAndNewlines))
         return "\(mainURL as! String)\(countries as! String)\(apiKey as! String)".trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
@@ -66,7 +65,6 @@ class ConstantsUtil {
         guard let languages =  plist.fetchValue(for: "GET_LANGUAGES", fromPlistWithName: "Constants") else {return ""}
         guard let apiKey =  plist.fetchValue(for: "api_key", fromPlistWithName: "Constants") else {return ""}
         //https://api.themoviedb.org/3/configuration/languages?api_key=1f54bd990f1cdfb230adb312546d765d
-        print("\(mainURL as! String)\(languages as! String)\(apiKey as! String)".trimmingCharacters(in: .whitespacesAndNewlines))
         return "\(mainURL as! String)\(languages as! String)\(apiKey as! String)".trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
@@ -75,7 +73,6 @@ class ConstantsUtil {
         guard let apiKey =  plist.fetchValue(for: "api_key", fromPlistWithName: "Constants") else {return ""}
         guard let translates =  plist.fetchValue(for: "GET_TRANSLATES", fromPlistWithName: "Constants") else {return ""}
         //https://api.themoviedb.org/3/configuration/primary_translations?api_key=<<api_key>>
-        print("\(mainURL as! String)\(translates as! String)\(apiKey as! String)")
         return "\(mainURL as! String)\(translates as! String)\(apiKey as! String)"
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-public final class HandledLanguage: NSCoding {
+public final class HandledLanguage {
     
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -53,19 +53,6 @@ public final class HandledLanguage: NSCoding {
         if let value = language { dictionary[SerializationKeys.language] = value }
         if let value = country { dictionary[SerializationKeys.country] = value }
         return dictionary
-    }
-    
-    // MARK: NSCoding Protocol
-    required public init(coder aDecoder: NSCoder) {
-        self.handledLanguage = aDecoder.decodeObject(forKey: SerializationKeys.handledLanguage) as? String
-        self.language = aDecoder.decodeObject(forKey: SerializationKeys.language) as? String
-        self.country = aDecoder.decodeObject(forKey: SerializationKeys.country) as? String
-    }
-    
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(handledLanguage, forKey: SerializationKeys.handledLanguage)
-        aCoder.encode(language, forKey: SerializationKeys.language)
-        aCoder.encode(country, forKey: SerializationKeys.country)
     }
     
 }

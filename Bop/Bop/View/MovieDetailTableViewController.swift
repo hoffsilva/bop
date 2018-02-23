@@ -62,15 +62,12 @@ extension MovieDetailTableViewController: UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(movie.genreIds?.description)
         return (movie.genreIds?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "genreCollectionViewCell", for: indexPath) as! GenresListCollectionViewCell
-        
         cell.genreImageView.image = UIImage(imageLiteralResourceName: "\(String(describing: movie.genreIds![indexPath.row]))")
-        
         return cell
     }
 }

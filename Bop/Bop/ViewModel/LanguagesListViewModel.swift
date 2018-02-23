@@ -24,9 +24,7 @@ class LanguagesListViewModel {
     var arrayLanguages = [Language]()
     var arrayCountry = [Country]()
     var arrayHandledLanguage = [HandledLanguage]()
-    
     var selectedLanguage = ""
-    
     var numberOfLanguages: Int {
         return arrayHandledLanguage.count
     }
@@ -44,24 +42,21 @@ class LanguagesListViewModel {
                 for translation in translationsList {
                     let cty = translation.suffix(2)
                     let lang = translation.prefix(2)
-                    var handledLanguage = HandledLanguage()
+                    let handledLanguage = HandledLanguage()
                     
                     for language in self.arrayLanguages {
                         if language.iso6391! == lang {
                             handledLanguage.language = language.englishName
-                            print(handledLanguage.dictionaryRepresentation())
                         }
                     }
                     
                     for country in self.arrayCountry {
                         if country.iso31661! == cty {
                             handledLanguage.country = country.englishName
-                            print(handledLanguage.dictionaryRepresentation())
                         }
                     }
                     
                     handledLanguage.handledLanguage = translation
-                    print(handledLanguage.dictionaryRepresentation())
                     self.arrayHandledLanguage.append(handledLanguage)
                 }
                 self.delegate?.didFinishLoading()
