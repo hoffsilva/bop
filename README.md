@@ -53,4 +53,10 @@ should follow:
 ### SwiftNotice
 
 * [SwiftNotice](https://github.com/johnlui/SwiftNotice), I used SwiftNotice to show alerts with errors and informations messages for users.
+
+### FCAlertView
+
+* [FCAlertView](https://github.com/nimati/FCAlertView), I used FCAlertView to show alert with internet connection error message for users.
+
+
    
