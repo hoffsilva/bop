@@ -56,7 +56,7 @@ should follow:
 
 ### FCAlertView
 
-* [FCAlertView](https://github.com/nimati/FCAlertView), I used SwiftNotice to show alerts with errors and informations messages for users.
+* [FCAlertView](https://github.com/nimati/FCAlertView), I used FCAlertView to show alert with internet connection error message for users.
 
 
    
