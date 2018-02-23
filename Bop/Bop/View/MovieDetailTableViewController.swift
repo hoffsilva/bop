@@ -52,7 +52,6 @@ class MovieDetailTableViewController: UITableViewController {
         let view = UIImageView(frame: tableView.frame)
         view.sd_setImage(with: URL(string: "\(ConstantsUtil.defaultPosterURL())\(movie.posterPath ?? "")"), completed: nil)
         view.contentMode = .scaleAspectFill
-        view.alpha = 0.3
         tableView.backgroundView = view
     }
 }

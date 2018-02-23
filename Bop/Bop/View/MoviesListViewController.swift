@@ -15,7 +15,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var moviesListTableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var moviesSearchBar: BindingSearchBar!
+    @IBOutlet weak var moviesSearchBar: UISearchBar!
     
     var currentMovie: Int!
     var currentPage = 2
@@ -129,12 +129,14 @@ extension MoviesListViewController: UISearchBarDelegate {
         searchBar.endEditing(true)
         moviesListViewModel.isSearchingMovies = true
         moviesListViewModel.arrayMovie = []
+        pleaseWait()
         moviesListViewModel.loadMovies()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         moviesListViewModel.searchParameter = searchText
     }
+    
 }
 
 extension MoviesListViewController: MoviesListDelegate {
@@ -161,7 +163,7 @@ extension MoviesListViewController {
         let view = UIImageView(frame: moviesListTableView.frame)
         view.image = #imageLiteral(resourceName: "bg_table_view")
         view.contentMode = .scaleAspectFill
-        view.alpha = 0.3
+        view.alpha = 0.2
         moviesListTableView.backgroundView = view
     }
     

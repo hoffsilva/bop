@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4344EDD4203E4181003D9F03 /* BindingSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */; };
 		435100D7203F2D8D00F65310 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435100D5203F2D8D00F65310 /* Country.swift */; };
 		435100D8203F2D8D00F65310 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435100D6203F2D8D00F65310 /* Language.swift */; };
 		435100DA203F2E6900F65310 /* HandledLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435100D9203F2E6800F65310 /* HandledLanguage.swift */; };
@@ -22,7 +21,6 @@
 		436666F2203913D600E91863 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436666F1203913D600E91863 /* Movie.swift */; };
 		436666F62039A9EC00E91863 /* MovieDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436666F52039A9EC00E91863 /* MovieDetailTableViewController.swift */; };
 		43EC9F252039D5AD000CEC14 /* ChangeLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9F242039D5AD000CEC14 /* ChangeLanguageViewController.swift */; };
-		43EC9F28203A2358000CEC14 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9F27203A2358000CEC14 /* Observable.swift */; };
 		43EC9F2A203A24A7000CEC14 /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9F29203A24A7000CEC14 /* MoviesListViewModel.swift */; };
 		43EC9F2C203A3210000CEC14 /* GenresListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9F2B203A3210000CEC14 /* GenresListCollectionViewController.swift */; };
 		43EC9F2F203A3815000CEC14 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9F2E203A3815000CEC14 /* SwiftNotice.swift */; };
@@ -33,7 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingSearchBar.swift; sourceTree = "<group>"; };
 		435100D5203F2D8D00F65310 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		435100D6203F2D8D00F65310 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		435100D9203F2E6800F65310 /* HandledLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandledLanguage.swift; sourceTree = "<group>"; };
@@ -50,7 +47,6 @@
 		436666F1203913D600E91863 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		436666F52039A9EC00E91863 /* MovieDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTableViewController.swift; sourceTree = "<group>"; };
 		43EC9F242039D5AD000CEC14 /* ChangeLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageViewController.swift; sourceTree = "<group>"; };
-		43EC9F27203A2358000CEC14 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		43EC9F29203A24A7000CEC14 /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
 		43EC9F2B203A3210000CEC14 /* GenresListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresListCollectionViewController.swift; sourceTree = "<group>"; };
 		43EC9F2E203A3815000CEC14 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftNotice.swift; path = Bop/SwiftNotice.swift; sourceTree = SOURCE_ROOT; };
@@ -156,8 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				43EC9F2E203A3815000CEC14 /* SwiftNotice.swift */,
-				43EC9F27203A2358000CEC14 /* Observable.swift */,
-				4344EDD3203E4181003D9F03 /* BindingSearchBar.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -327,12 +321,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43EC9F28203A2358000CEC14 /* Observable.swift in Sources */,
 				436666EA2038DCA200E91863 /* MoviesListViewController.swift in Sources */,
 				436666F02038EFCC00E91863 /* GenresListCollectionViewCell.swift in Sources */,
 				43EC9F2A203A24A7000CEC14 /* MoviesListViewModel.swift in Sources */,
 				436666F62039A9EC00E91863 /* MovieDetailTableViewController.swift in Sources */,
-				4344EDD4203E4181003D9F03 /* BindingSearchBar.swift in Sources */,
 				436666F2203913D600E91863 /* Movie.swift in Sources */,
 				43EC9F2F203A3815000CEC14 /* SwiftNotice.swift in Sources */,
 				435100D8203F2D8D00F65310 /* Language.swift in Sources */,

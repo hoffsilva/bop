@@ -22,6 +22,7 @@ class ChangeLanguageViewController: UIViewController {
         languagesListPickerView.delegate = self
         languagesListPickerView.dataSource = self
         languagesListViewModel.loadTranslates()
+        pleaseWait()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +51,7 @@ class ChangeLanguageViewController: UIViewController {
 
 extension ChangeLanguageViewController: LanguagesListDelegate {
     func didFinishLoading() {
+        clearAllNotice()
         languagesListPickerView.reloadAllComponents()
     }
     
